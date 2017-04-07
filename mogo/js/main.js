@@ -1,3 +1,189 @@
+// GOOGLE MAPS
+
+var map;
+var mapCenter = {lat: 48.017667, lng: 37.805021};
+var marker;
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: mapCenter,
+        zoom: 10,
+        styles: [
+            {
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#f5f5f5"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                    {
+                        "color": "#f5f5f5"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#bdbdbd"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#eeeeee"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#e5e5e5"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#fbd34d"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#dadada"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit.line",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#e5e5e5"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit.station",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#eeeeee"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#ffcece"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            }
+        ],
+        scrollwheel: false
+
+    });
+    marker = new google.maps.Marker({
+        position: mapCenter,
+        map: map,
+        title: "MOGO",
+        animation: google.maps.Animation.DROP,
+        icon: "images/marker.png",
+    });
+    window.setTimeout(function() {
+        map.setZoom(15);
+    }, 3000);
+
+
+}
+
 $(function () {
 
     //header slider
@@ -87,6 +273,7 @@ $(function () {
                 $('.header-navbar-menu a[href="#'+$(element).attr('id')+'"]').removeClass('active');
             }
         });
+
     });
     
     function runCounter(element){
@@ -148,7 +335,7 @@ $(function () {
     });
 
     //PORTFOLIO AUTO WIDTH
-    /*
+    
      $('.portfolio-content-container figure').css({
      width: .25*$(window).width()
      });
@@ -158,7 +345,7 @@ $(function () {
      $('.portfolio-content-container').css({
      width:containerWidth
      });
-     */
+     
 
     $('.portfolio-content-container').masonry({
         // options
@@ -166,7 +353,7 @@ $(function () {
         columnWidth: .25*$(window).width()
     });
 
-    /*
+   
      if($('.portfolio-content-container').width() > $('.portfolio-content').width()) {
 
      $('.portfolio-content-container').draggable({
@@ -175,7 +362,7 @@ $(function () {
      containment: [parseInt($(window).width() - $('.portfolio-content-container').width()),0,0,0]
      });
 
-     }*/
+     }
 
 
     $('.project-image-small li').click(function () {
@@ -194,5 +381,19 @@ $(function () {
         function(){
             $('.portfolio-content-popup').show('slow');
         }
-    )
+    );
+
+//MAP
+
+    $('.map-caption').click(function(){
+        $('.open-map').animate({
+            height: '100vh'
+        }, 1000);
+        initMap();
+        var y =  $('.open-map').offset().top;
+        $('body,html').animate({
+            scrollTop: y
+        }, 1000);
+        $('.open-map .shadow-bg').fadeOut(1200);
+    });
 });

@@ -19,14 +19,14 @@
     font-weight: 600;
     font-style: normal;
     transition: all 400ms ease;
-    line-height: 149px;
+    line-height: 50px;
   }
   .owl-nav .owl-prev{
-    top: 0;
+    top: 50px;
     left: 0;
   }
 .owl-nav .owl-next{
-  top: 0;
+  top: 50px;
   right: 0;
 }
     .owl-theme .owl-nav [class*='owl-']:hover {
